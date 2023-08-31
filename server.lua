@@ -28,7 +28,6 @@ function InitializePlayer(source)
         license = identifier,
         selectedEffect = nil,
         unlocked = {},
-        hasInitialized = false, -- Variable to keep track of state instead of checking database later on to update / fetch
     }
 
     -- Fetch from database, if there are any saved values, then set them
@@ -40,7 +39,6 @@ function InitializePlayer(source)
 
             CachedData.players[identifier].selectedEffect = data.selectedEffect or nil
             CachedData.players[identifier].unlocked = json.decode(data.unlocked) or {}
-            CachedData.players[identifier].hasInitialized = true
 
             p:resolve()
         else
@@ -49,7 +47,6 @@ function InitializePlayer(source)
                 ["@unlocked"] = json.encode({}),
                 ["@selectedEffect"] = nil,
             }, function()
-                CachedData.players[identifier].hasInitialized = true
                 p:resolve()
             end)
         end
@@ -197,6 +194,7 @@ function GetLockedEffectsForPlayer(identifier)
     return lockedEffects
 end
 
-RegisterCommand("unlockeffect", function(source, args)
-    UnlockEffect(source, args[1])
-end, false)
+-- Command to unlock, for testing purposes
+-- RegisterCommand("unlockeffect", function(source, args)
+--     UnlockEffect(source, args[1])
+-- end, false)

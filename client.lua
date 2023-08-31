@@ -2,7 +2,6 @@ local fetchedClosePedsTimer = 0
 local closePeds = {}
 local availableEffects = {}
 
-local i = 0
 CreateThread(function()
     while (true) do
         local sleep = 100
@@ -31,16 +30,6 @@ CreateThread(function()
         Wait(sleep)
     end
 end)
-
--- CreateThread(function()
---     while (true) do
---         for _, ped in pairs(closePeds) do
---             Draw3DText(GetEntityCoords(ped), "Registered", 0.5, {r = 255, g = 255, b = 255, a = 255})
---         end
-
---         Wait(1)
---     end
--- end)
 
 function GetClosestPeds(plyPos, radius)
     local peds = {}
